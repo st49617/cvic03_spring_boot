@@ -1,0 +1,22 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'net.jetensky.inpia'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-context', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aop', version: '5.1.5.RELEASE'
+    testCompile 'junit:junit:4.4'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '5.1.5.RELEASE'
+
+}
