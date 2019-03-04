@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+<h1>Please add new report</h1>
+<form
+        th:object="${issueReport}" th:action="@{/issuereport}"
+        method="post">
+    <div>
+        Description: <textarea name="description"
+    th:field="*{description}"></textarea>
+    </div>
+    <div>
+        URL: <input name="url"  th:field="*{url}"/>
+    </div>
+    <input type="submit">
+</form>
+
+</body>
+</html>
