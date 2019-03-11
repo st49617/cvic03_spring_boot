@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DAOAspect {
 
-	@Before(value = "execution(* net.jetensky.inpia.cvic03.dao.IssueRepository.*(..)) and args(issueReport)")
+	@Before(value = "execution(* net.jetensky.inpia.cvic03.dao.IssueReportRepository.*(..)) and args(issueReport)")
 	public void beforeAdvice(JoinPoint joinPoint, IssueReport issueReport) {
 		System.out.println("Before method:" + joinPoint.getSignature());
 		System.out.println("Creating IssueReport with description - " + issueReport.getDescription());
 	}
 
-	@After(value = "execution(* net.jetensky.inpia.cvic03.dao.IssueRepository.*(..)) and args(issueReport)")
+	@After(value = "execution(* net.jetensky.inpia.cvic03.dao.IssueReportRepository.*(..)) and args(issueReport)")
 	public void afterAdvice(JoinPoint joinPoint, IssueReport issueReport) {
 		System.out.println("After method:" + joinPoint.getSignature());
 

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import net.jetensky.inpia.cvic03.dao.IssueReport;
-import net.jetensky.inpia.cvic03.dao.IssueRepository;
+import net.jetensky.inpia.cvic03.dao.IssueReportRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/issues")
 public class IssueRestController {
-    private IssueRepository issueRepository;
+    private IssueReportRepository issueReportRepository;
 
-    public IssueRestController(IssueRepository issueRepository) {
-        this.issueRepository = issueRepository;
+    public IssueRestController(IssueReportRepository issueReportRepository) {
+        this.issueReportRepository = issueReportRepository;
     }
 
     @GetMapping
     public List<IssueReport> getIssues() {
-        return this.issueRepository.findAllButPrivate();
+        return this.issueReportRepository.findAllButPrivate();
     }
 
     @GetMapping("/{id}")

@@ -1,10 +1,8 @@
 package net.jetensky.inpia.cvic03.dao;
 
 import java.sql.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class IssueReport {
@@ -19,6 +17,9 @@ public class IssueReport {
     private boolean done;
     private Date created = new Date(System.currentTimeMillis());
     private Date updated;
+
+    @ManyToOne(optional = false)
+    private User user;
 
     public IssueReport() {}
 
@@ -88,5 +89,13 @@ public class IssueReport {
 
     public long getId() {
         return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

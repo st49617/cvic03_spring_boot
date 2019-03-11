@@ -1,6 +1,6 @@
 package net.jetensky.inpia.cvic03.controller;
 
-import net.jetensky.inpia.cvic03.dao.IssueRepository;
+import net.jetensky.inpia.cvic03.dao.IssueReportRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class IssueControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private IssueRepository issueRepository;
+    private IssueReportRepository issueReportRepository;
 
     @Test
     public void loginTest() throws Exception {

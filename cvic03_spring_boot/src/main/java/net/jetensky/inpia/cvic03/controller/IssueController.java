@@ -1,26 +1,22 @@
 package net.jetensky.inpia.cvic03.controller;
 
 import net.jetensky.inpia.cvic03.dao.IssueReport;
-import net.jetensky.inpia.cvic03.dao.IssueRepository;
+import net.jetensky.inpia.cvic03.dao.IssueReportRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
 public class IssueController {
-    IssueRepository issueRepository;
+    IssueReportRepository issueReportRepository;
 
-    public IssueController(IssueRepository issueRepository) {
-        this.issueRepository = issueRepository;
+    public IssueController(IssueReportRepository issueReportRepository) {
+        this.issueReportRepository = issueReportRepository;
     }
 
     @GetMapping("/issuereport")
@@ -32,14 +28,14 @@ public class IssueController {
 
     @PostMapping(value="/issuereport")
     public String submitReport(IssueReport issueReport, RedirectAttributes ra) {
-        this.issueRepository.save(issueReport);
+        this.issueReportRepository.save(issueReport);
         ra.addAttribute("submitted", true);
         return "redirect:/issuereport";
     }
 
     @GetMapping("/issues")
     public String getIssues(Model model) {
-        model.addAttribute("issues", this.issueRepository.findAllButPrivate());
+        model.addAttribute("issues", this.issueReportRepository.findAllButPrivate());
         return "issues/issuereport_list";
     }
 }
