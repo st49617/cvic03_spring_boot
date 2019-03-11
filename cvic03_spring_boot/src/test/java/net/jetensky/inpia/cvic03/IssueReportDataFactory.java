@@ -24,7 +24,7 @@ public class IssueReportDataFactory {
 
     public void saveIssueReport(String email) {
         //User user = saveUser();
-        User user = (User) creator.save(new User());
+        User user = (User) creator.saveEntity(new User());
 
         IssueReport entity = new IssueReport();
         entity.setEmail(email);

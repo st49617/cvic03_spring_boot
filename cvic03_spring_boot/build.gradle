@@ -4,6 +4,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'groovy'
 
 group = 'net.jetensky.inpia.cvic03.springboot'
 version = '0.0.1-SNAPSHOT'
@@ -25,4 +26,7 @@ dependencies {
     
     
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'commons-beanutils:commons-beanutils:1.8.3'
+    testImplementation 'org.apache.commons:commons-lang3:3.3.2'
+    testImplementation "org.codehaus.groovy:groovy-all:2.4.15"
 }

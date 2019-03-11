@@ -4,10 +4,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,17 +22,31 @@ public class Creator {
 
     Log log = LogFactory.getLog(Creator.class);
 
+    static Creator instance;
+
+    @PostConstruct
+    public void postConstruct() {
+        instance = this;
+    }
+
     @Autowired
     private ApplicationContext applicationContext;
 
+    public static void save(Object... entities) {
+        instance.saveEntities(entities);
+    }
 
-    public void save(Object... entities) {
+    public static Object save1(Object entity) {
+        return instance.saveEntity(entity);
+    }
+
+    public void saveEntities(Object... entities) {
         for (Object entity : entities) {
-            save(entity);
+            saveEntity(entity);
         }
     }
 
-    public Object save(Object entity) {
+    public Object saveEntity(Object entity) {
         try {
             Map props = PropertyUtils.describe(entity);
             List<Field> allFields = FieldUtils.getAllFieldsList(entity.getClass());
@@ -90,7 +101,7 @@ public class Creator {
             final boolean isEntity = isEntity(valueClass);
             if ((isEntity)) {
 
-                save(propValue);
+                saveEntity(propValue);
                 String className = propValue.getClass().getSimpleName();
                 String daoName = className.substring(0,1).toLowerCase() + className.substring(1) + "Repository";
 
